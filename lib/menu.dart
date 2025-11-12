@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:goal_poacher_mobile/widgets/left_drawer.dart';
+import 'package:goal_poacher_mobile/widgets/product_card.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({super.key});
@@ -6,7 +8,7 @@ class MyHomePage extends StatelessWidget {
     final List<ItemHomepage> items = [
       ItemHomepage("All Products", Icons.shopping_bag, Colors.blue),
       ItemHomepage("My Products", Icons.inventory, Colors.green),
-      ItemHomepage("Create Product", Icons.add, Colors.red),
+      ItemHomepage("Add Product", Icons.add, Colors.red),
     ];
 
     @override
@@ -22,6 +24,7 @@ class MyHomePage extends StatelessWidget {
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
+        drawer: LeftDrawer(),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -29,10 +32,11 @@ class MyHomePage extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 16.0),
                 child: Text(
-                  'Selamat datang di Goal Poacher',
+                  'Selamat datang di Goal Poacher!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -65,6 +69,7 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2.0,
+      color: const Color(0xFF004D40),
       child: Container(
         width: MediaQuery.of(context).size.width / 3.5,
         padding: const EdgeInsets.all(16.0),
@@ -72,10 +77,12 @@ class InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white,),
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              style: const TextStyle(color: Colors.white)),
           ],
         ),
       ),
@@ -92,48 +99,3 @@ class ItemHomepage {
  ItemHomepage(this.name, this.icon, this.color);
 }
 
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item; 
-
-  const ItemCard(this.item, {super.key}); 
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color, 
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}")
-              )
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
