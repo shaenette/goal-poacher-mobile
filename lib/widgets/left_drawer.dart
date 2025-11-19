@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:goal_poacher_mobile/menu.dart';
+import 'package:goal_poacher_mobile/screens/login.dart';
+import 'package:goal_poacher_mobile/screens/menu.dart';
 import 'package:goal_poacher_mobile/screens/addproduct_form.dart';
+import 'package:goal_poacher_mobile/screens/product_entry_list.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -56,10 +58,33 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddProductFormPage(),
+                    builder: (context) => ProductFormPage(),
                   ));
             },
           ),
+
+          ListTile(
+            leading: const Icon(Icons.list, color: Color(0xFFFFD700)),
+            title: const Text('Products List'),
+            onTap: () {
+                // Route to news list page
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProductEntryListPage()),
+                );
+              },
+           ),
+
+        ListTile(
+            leading: const Icon(Icons.logout, color: Color.fromARGB(255, 120, 118, 111)),
+            title: const Text('Logout'),
+            onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+            },
+        ),
         ],
       ),
     );
